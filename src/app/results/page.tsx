@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { Container, Card, Button, Row, Col, Badge } from 'react-bootstrap';
+import { Container, Card, Button, Row, Col } from 'react-bootstrap';
 import html2canvas from 'html2canvas';
 import questions from '@/data/questions.json';
 
@@ -210,7 +210,7 @@ export default function ResultsPage() {
                                         {nickname || '나의'} 정치성향
                                     </h2>
                                     <h3 className="mb-4">
-                                        "{getPoliticalTendency()}"
+                                        &ldquo;{getPoliticalTendency()}&rdquo;
                                     </h3>
                                 </div>
 
