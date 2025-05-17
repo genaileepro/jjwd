@@ -72,7 +72,7 @@ export default function ResultsPage() {
     const getPoliticalTendency = () => {
         if (!results) return '';
 
-        const leftPercentage = (results.left / results.total) * 100;
+        const leftPercentage = results.left;
 
         if (leftPercentage >= 70) return '강한 진보 성향';
         else if (leftPercentage >= 55) return '진보 성향';
@@ -133,8 +133,8 @@ export default function ResultsPage() {
         );
     }
 
-    const leftPercentage = Math.round((results.left / results.total) * 100);
-    const rightPercentage = 100 - leftPercentage;
+    const leftPercentage = results.left;
+    const rightPercentage = results.right;
 
     // 카테고리별 결과 계산
     const categoryResults = results.categories || getCategoryResults();
@@ -167,16 +167,16 @@ export default function ResultsPage() {
                 categories[category] = { left: 0, right: 0, total: 0 };
             }
 
-            const agreed = answers[question.id] === true;
-            categories[category].total++;
+            const answer = answers[question.id];
+            if (answer !== undefined) {
+                const normalizedScore = 2 - answer; // -2 ~ 2 범위
+                categories[category].total += 2; // 각 문항당 최대 편차는 2*2
 
-            if (
-                (agreed && question.scoreDirection === 'left') ||
-                (!agreed && question.scoreDirection === 'right')
-            ) {
-                categories[category].left++;
-            } else {
-                categories[category].right++;
+                if (normalizedScore > 0) {
+                    categories[category].left += normalizedScore;
+                } else {
+                    categories[category].right += Math.abs(normalizedScore);
+                }
             }
         });
 
@@ -186,7 +186,10 @@ export default function ResultsPage() {
             leftScore: scores.left,
             rightScore: scores.right,
             total: scores.total,
-            leftPercentage: Math.round((scores.left / scores.total) * 100),
+            leftPercentage:
+                Math.round(
+                    (scores.left / (scores.left + scores.right)) * 100
+                ) || 50,
         }));
     }
 

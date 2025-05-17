@@ -145,6 +145,37 @@ body {
     transform: translateY(-2px) !important;
 }
 
+/* 새롭게 추가된 중립 버튼 스타일 */
+.btn-dark {
+    background-color: #343a40 !important;
+    border-color: #343a40 !important;
+    color: white !important;
+    border-radius: 50px !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 4px 10px rgba(52, 58, 64, 0.2) !important;
+}
+
+.btn-dark:hover {
+    background-color: #212529 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 15px rgba(52, 58, 64, 0.3) !important;
+}
+
+.btn-outline-secondary {
+    background-color: transparent !important;
+    border: 2px solid #6c757d !important;
+    color: #6c757d !important;
+    border-radius: 50px !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease !important;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #f1f3f5 !important;
+    transform: translateY(-2px) !important;
+}
+
 .progress-left-right {
     height: 16px !important;
     border-radius: 50px !important;
@@ -201,49 +232,59 @@ body {
 }
 .category-foreign {
     background-color: #e3fafc;
-    color: #0c8599;
+    color: #1098ad;
 }
 
 .result-card {
     position: relative;
     overflow: hidden;
+    z-index: 1;
 }
 
 .result-card::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 6px;
-    background: var(--gradient-bg);
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle,
+        rgba(151, 117, 250, 0.03) 0%,
+        rgba(255, 255, 255, 0) 50%
+    );
+    z-index: -1;
 }
 
 .nickname-input {
-    border: 2px solid #dee2e6 !important;
-    border-radius: 50px !important;
-    padding: 10px 20px !important;
-    transition: all 0.2s ease !important;
-    text-align: center !important;
-    font-weight: 500 !important;
+    border: none;
+    border-bottom: 2px solid #ced4da;
+    border-radius: 0;
+    padding: 8px 2px;
+    font-size: 1.1rem;
+    text-align: center;
+    transition: all 0.2s ease;
+    background-color: transparent;
 }
 
 .nickname-input:focus {
-    border-color: var(--center-color) !important;
-    box-shadow: 0 0 0 3px rgba(151, 117, 250, 0.25) !important;
+    outline: none;
+    border-bottom: 2px solid var(--center-color);
+    box-shadow: none;
 }
 
 .page-title {
     position: relative;
     display: inline-block;
-    margin-bottom: 1.5rem;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
 }
 
 .page-title::after {
     content: '';
     position: absolute;
-    bottom: -10px;
     left: 50%;
+    bottom: 0;
     transform: translateX(-50%);
     width: 60px;
     height: 4px;
@@ -252,11 +293,11 @@ body {
 }
 
 .result-summary {
-    position: relative;
-    padding: 20px;
-    margin: 20px 0;
-    border-radius: 12px;
     background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
 }
 
 .result-summary::before {
@@ -264,39 +305,40 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    width: 4px;
-    height: 100%;
+    width: 100%;
+    height: 5px;
     background: var(--gradient-bg);
-    border-radius: 4px 0 0 4px;
 }
 
 @media (max-width: 768px) {
     .political-card {
-        margin: 0 10px;
+        margin-left: 10px;
+        margin-right: 10px;
     }
 }
 
-/* 경고창 스타일 커스터마이징 */
 .alert-warning {
-    background-color: rgba(255, 244, 230, 0.9) !important;
-    border-left: 4px solid #f59f00 !important;
-    border-radius: 8px !important;
-    font-size: 0.95rem !important;
+    background-color: #fff9db;
+    border-color: #ffd43b;
+    color: #664d03;
+    border-radius: 12px;
 }
 
 .alert-warning .alert-heading {
-    color: #e67700 !important;
-    margin-bottom: 0.75rem !important;
+    color: #f08c00;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
 }
 
 .alert-warning ul {
-    margin-bottom: 0 !important;
+    padding-left: 0;
 }
 
 .alert-warning li {
-    margin-bottom: 0.5rem !important;
+    margin-bottom: 5px;
+    list-style: none;
 }
 
 .alert-warning li:last-child {
-    margin-bottom: 0 !important;
+    margin-bottom: 0;
 }
