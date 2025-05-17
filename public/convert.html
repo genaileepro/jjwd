@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>SVG를 ICO로 변환</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            canvas {
+                border: 1px solid #ccc;
+                margin: 10px 0;
+            }
+            button {
+                padding: 10px 15px;
+                background: #007bff;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            button:hover {
+                background: #0056b3;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>⚖ 파비콘 생성기</h1>
+        <div>
+            <canvas id="canvas" width="32" height="32"></canvas>
+        </div>
+        <button id="download">파비콘 다운로드</button>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const canvas = document.getElementById('canvas');
+                const ctx = canvas.getContext('2d');
+
+                // 캔버스 배경을 투명하게
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // 이모지 그리기
+                ctx.font = '24px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('⚖', canvas.width / 2, canvas.height / 2);
+
+                // 다운로드 버튼 이벤트
+                document
+                    .getElementById('download')
+                    .addEventListener('click', function () {
+                        // 캔버스를 이미지로 변환
+                        const image = canvas.toDataURL('image/png');
+
+                        // 다운로드 링크 생성
+                        const link = document.createElement('a');
+                        link.href = image;
+                        link.download = 'favicon.png';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+
+                        alert(
+                            'favicon.png가 다운로드되었습니다. 이제 이 파일을 favicon.ico로 변환하여 사용하세요.'
+                        );
+                    });
+            });
+        </script>
+    </body>
+</html>
